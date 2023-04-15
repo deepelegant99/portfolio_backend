@@ -1,14 +1,20 @@
-const express = require('express')
-const mongoose = require('mongoose')
-const app = express()
-const dbConnection= require('./database/connectDB')
-require('dotenv').config()
+const express = require("express");
+const mongoose = require("mongoose");
+const app = express();
+const dbConnection = require("./database/connectDB");
+require("dotenv").config();
+const PORT = process.env.PORT || 5000;
 
-app.listen(5000, () => {
-    console.log('Listening at port 5000')
-    dbConnection();
-})
+const cors = require("cors");
 
-app.get('/', (req, res) => {
-    res.send("Hello World")
-})
+app.use(express.json());
+app.use(cors());
+
+app.listen(PORT, () => {
+  console.log("Listening at port ${PORT}...");
+  dbConnection();
+});
+
+app.get("/data", (req, res) => {
+  res.send("Yellow ");
+});
